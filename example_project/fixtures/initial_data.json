@@ -1,0 +1,82 @@
+[
+    {
+        "pk": 1, 
+        "model": "flatpages.flatpage", 
+        "fields": {
+            "registration_required": false, 
+            "title": "Homepage", 
+            "url": "/", 
+            "template_name": "", 
+            "sites": [
+                1
+            ], 
+            "content": "<p>This is the homepage.</p>\r\n<p>&nbsp;</p>\r\n<p><a href='/login/' >Login to see the edit buttons.  They'll be at the bottom.</a></p>", 
+            "enable_comments": false
+        }
+    },
+    
+    {
+            "pk": 1, 
+            "model": "servee_navigation.menuitem", 
+            "fields": {
+                "rgt": 8, 
+                "target": "", 
+                "title": "Home", 
+                "urlpath": "/", 
+                "site": 1, 
+                "object_id": null, 
+                "lft": 1, 
+                "depth": 1, 
+                "content_type": null, 
+                "tree_id": 1
+            }
+        }, 
+        {
+            "pk": 2, 
+            "model": "servee_navigation.menuitem", 
+            "fields": {
+                "rgt": 3, 
+                "target": "", 
+                "title": "Admin", 
+                "urlpath": "/admin", 
+                "site": 1, 
+                "object_id": null, 
+                "lft": 2, 
+                "depth": 2, 
+                "content_type": null, 
+                "tree_id": 1
+            }
+        }, 
+        {
+            "pk": 3, 
+            "model": "servee_navigation.menuitem", 
+            "fields": {
+                "rgt": 5, 
+                "target": "", 
+                "title": "Login", 
+                "urlpath": "/login", 
+                "site": 1, 
+                "object_id": null, 
+                "lft": 4, 
+                "depth": 2, 
+                "content_type": null, 
+                "tree_id": 1
+            }
+        }, 
+        {
+            "pk": 4, 
+            "model": "servee_navigation.menuitem", 
+            "fields": {
+                "rgt": 7, 
+                "target": "_blank", 
+                "title": "Google", 
+                "urlpath": "http://google.com", 
+                "site": 1, 
+                "object_id": null, 
+                "lft": 6, 
+                "depth": 2, 
+                "content_type": null, 
+                "tree_id": 1
+            }
+        }
+]

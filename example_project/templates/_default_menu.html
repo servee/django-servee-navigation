@@ -1,0 +1,20 @@
+{% load navigation %}
+<ul id="navigation" class="nav">
+  <li><a href="/"{% if page.is_root %} class="current"{% endif %}>Home</a></li>
+  {% for p in none|menu_pages %}<li>
+    <a href="{{ p.urlpath }}"{% ifequal p selectedmenu %} class="current"{% endifequal %} target="{{ p.target }}">{{ p.title }}</a>
+		{% if p.get_children %}<ul>
+		    {% for p_ch in p|menu_pages %}<li>
+    		    <a href="{{ p_ch.urlpath }}"{% ifequal p selectedmenu %} class="current"{% endifequal %} target="{{ p_ch.target }}">{{ p_ch.title }}</a>
+    		    {% if p_ch.get_children %}<ul>
+        		    {% for p_tr in p_ch|menu_pages %}<li>
+            		    <a href="{{ p_tr.urlpath }}"{% ifequal p_tr selectedmenu %} class="current"{% endifequal %} target="{{ p_tr.target }}">{{ p_tr.title }}</a>
+            		</li>
+            		{% endfor %}</ul>
+        		{% endif %}
+    		</li>
+    		{% endfor %}</ul>
+		{% endif %}
+  </li>
+  {% endfor %}
+</ul>
