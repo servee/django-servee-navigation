@@ -1,8 +1,6 @@
 import copy
 
 from django import template
-from django.db.models import Q
-from django.template import Node, NodeList, Variable
 from servee_navigation.models import MenuItem
 
 register = template.Library()
@@ -40,13 +38,23 @@ def menu_pages(menuitem):
 
     There are a lot of variations on this theme in the various
     menu-types but most can be accomplished with similar incantations.
-
+    
+    You can also try passing it a string of a urlpath, to get
+    everything under that node.
     """
     if not menuitem:
         try:
             menuitem = MenuItem.objects.get(urlpath='/')
         except MenuItem.DoesNotExist:
             return []
+    if type(menuitem) == basestring:
+        # Accept a path, and try to get the menuitem from it.
+        try:
+            menuitem = MenuItem.objects.get(urlpath=menuitem)
+        except MenuItem.DoesNotExist:
+            return []
+    elif type(menuitem) != MenuItem:
+        return []
     return menuitem.get_children().distinct()
 
 
