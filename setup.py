@@ -86,7 +86,7 @@ setup(
     package_data = find_package_data("servee_navigation", only_in_packages=False),
     include_package_data=True,
     install_requires = [
-        'django-servee>0.5.5',
+        # 'django-servee>0.5.5',
         'django-treebeard',
     ],
     classifiers = [
