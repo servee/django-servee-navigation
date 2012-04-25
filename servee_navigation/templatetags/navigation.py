@@ -6,7 +6,7 @@ from servee_navigation.models import MenuItem
 register = template.Library()
 
 def menu_pages(menuitem):
-    """ 
+    """
     Returns the childpages of <page> that <user> has access to.
 
     Usage: page|menu_pages:user
@@ -21,12 +21,12 @@ def menu_pages(menuitem):
 
     When a request comes in for '/pageb1/pageb2/' the sitemanger
     passes the root of the site as `root` and the requested page as
-    `page`. 
+    `page`.
 
     A simple menu can be created like this:
 
     {% load sitemanagertags %}
-    {% with page|currentmenu:2 as selectedmenu %}    
+    {% with page|currentmenu:2 as selectedmenu %}
     <ul id="nav">
       <li><a href="/"{% if page.is_root %} class="current"{% endif %}>{{ page.get_root.title }}</a></li>
         {% for p in page.get_root|menu_pages:user %}<li>
@@ -38,7 +38,7 @@ def menu_pages(menuitem):
 
     There are a lot of variations on this theme in the various
     menu-types but most can be accomplished with similar incantations.
-    
+
     You can also try passing it a string of a urlpath, to get
     everything under that node.
     """
@@ -47,7 +47,7 @@ def menu_pages(menuitem):
             menuitem = MenuItem.objects.get(urlpath='/')
         except MenuItem.DoesNotExist:
             return []
-    if type(menuitem) == basestring:
+    if isinstance(menuitem, basestring):
         # Accept a path, and try to get the menuitem from it.
         try:
             menuitem = MenuItem.objects.get(urlpath=menuitem)
@@ -65,7 +65,7 @@ def currentmenu(menuitem, depth):
 
     You can use this to highlight 'current' items in a menu for
     example. See menu_pages for a demo.
-    
+
     """
     if not menuitem:
         menuitem = MenuItem.objects.get(urlpath='/')
@@ -85,7 +85,7 @@ def tree_info(values):
     Given a list of tree items, produces doubles of a tree item and a
     ``dict`` containing information about the tree structure around the
     item, with the following contents:
-    
+
        new_level
           ``True`` if the current item is the start of a new level in
           the tree, ``False`` otherwise.
@@ -115,7 +115,7 @@ def tree_info(values):
         # Get previous, current and next
         if i>0: previous = values[i-1]
         current = values[i]
-        if i+1<n: 
+        if i+1<n:
             next = values[i+1]
         else:
             next = None

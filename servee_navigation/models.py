@@ -6,22 +6,21 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 
-# Create your models here.
 class MenuItem(NS_Node):
-    title      = models.CharField(max_length=255)
-    urlpath    = models.CharField(max_length=255, blank=True, db_index=True)
-    target     = models.CharField(max_length=32, blank=True, null=True)
-    site       = models.ForeignKey(Site, related_name="sitepages", default=settings.SITE_ID)
+    title = models.CharField(max_length=255)
+    urlpath = models.CharField(max_length=255, blank=True, db_index=True)
+    target = models.CharField(max_length=32, blank=True, null=True)
+    site = models.ForeignKey(Site, related_name="sitepages", default=settings.SITE_ID)
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
     object_id = models.IntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    
+
+    def get_absolute_url(self):
+        return self.urlpath or self.content_object.get_absolute_url()
+
     def __unicode__(self):
-        return u'%s' %(self.title)
-    
-    def __str__ (self):
-        return u'%s' %(self.title)
-            
+        return u'%s' % self.title
+
     class Meta:
         # From treebeard docs
         #
@@ -36,6 +35,6 @@ class MenuItem(NS_Node):
         #
         # If you don't, the tree won't work, since ns_tree.NS_Node
         # completely depends on this attribute.
-        
+
         #unique_together = (("urlpath", "site"),)
         ordering = ['tree_id', 'lft']
